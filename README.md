@@ -50,6 +50,7 @@ Additional Security Measures:
 - HashSafe terminates after 3 unsuccessful Sign-In attempts, making brute-forcing via the GUI practically impossible.
 
 
+
 Installation:
 
 To install HashSafe, follow these steps:
@@ -64,11 +65,15 @@ Navigate to the project directory:
 bash
 Copy code
 cd HashSafe
+
+
 Install the required dependencies:
 
 bash
 Copy code
 pip install -r requirements.txt
+
+
 Run the application:
 
 bash
@@ -76,10 +81,10 @@ Copy code
 python3 main.py
 
 
+
 Creating Launchers/Desktop Shortcuts:
 
 For Linux Users:
-Create a Launcher:
 
 Open a terminal and navigate to the project directory.
 
@@ -90,18 +95,24 @@ Copy code
 # Set absolute paths
 SCRIPT_DIR="/home/user/HashSafe"
 MAIN_PY="$SCRIPT_DIR/main.py"
+
 Replace /home/user/HashSafe with the actual path to the run_main.sh script.
+
 
 Make the run_main.sh script executable:
 
 bash
 Copy code
 chmod +x run_main.sh
+
+
 Run the run_main.sh script:
 
 bash
 Copy code
 ./run_main.sh
+
+
 Optionally, you can create a desktop launcher:
 
 Using MenuLibre:
@@ -111,6 +122,7 @@ Install MenuLibre if it's not already installed:
 bash
 Copy code
 sudo apt-get install menulibre
+
 Open MenuLibre from your application menu.
 
 Click "Add Application" to create a new entry.
@@ -142,11 +154,11 @@ Icon=/path/to/icon.png
 Terminal=false
 Type=Application
 Categories=Utility;
+
 Replace /path/to/icon.png with the actual path to an icon file.
 
 
 For Windows Users:
-Create a Desktop Shortcut:
 
 Open a Command Prompt and navigate to the project directory.
 
@@ -157,18 +169,24 @@ Copy code
 REM Set absolute paths
 set SCRIPT_DIR=C:\Users\YourUsername\Documents\HashSafe\
 set MAIN_PY=%SCRIPT_DIR%main.py
+
 Ensure that C:\Users\YourUsername\Documents\HashSafe\ correctly resolves to the directory containing run_main.bat.
+
 
 Make the run_main.bat script executable:
 
 cmd
 Copy code
 icacls run_main.bat /grant Everyone:F
+
+
 Run the run_main.bat script:
 
 cmd
 Copy code
 run_main.bat
+
+
 Optionally, you can create a desktop shortcut:
 
 Right-click on the desktop and select "New" > "Shortcut".
@@ -179,7 +197,10 @@ Click "Next" and give the shortcut a name, e.g., "HashSafe".
 
 Click "Finish" to create the shortcut.
 
-Usage
+
+
+Usage:
+
 Sign Up: Create a new account by providing a master password.
 
 Sign In: Log in using your master password.
@@ -190,11 +211,17 @@ View Password: Retrieve and view stored passwords securely.
 
 Delete Password: Remove passwords from your vault.
 
-Contributing
+
+
+Contributing:
+
 Contributions are welcome as long as the license is respected.
 
-License
+
+
+License:
 This project is licensed under the GNU General Public License v3.0. See the LICENSE file for details.
+
 
 
 Audit:
@@ -229,6 +256,8 @@ Run metrics:
                 Medium: 0.0
                 High: 0.0
 Files skipped (0):
+
+
 Interpretation:
 
 The audit conducted using Bandit, a widely-used static analysis tool for Python, revealed no security issues in the codebase. This is a positive outcome, indicating that HashSafe's code adheres to best practices and does not contain any obvious vulnerabilities.
@@ -240,6 +269,7 @@ Comprehensive Scan: The audit covered all 839 lines of code without skipping any
 High Confidence: The results show zero issues across all severity and confidence levels, reinforcing the reliability of the code.
 
 This audit provides confidence in the security of HashSafe, ensuring that users can trust the application with their sensitive data.
+
 
 
 Contact:
