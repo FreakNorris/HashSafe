@@ -64,6 +64,7 @@ To install HashSafe, follow these steps:
 5. Delete Password: Remove passwords from your vault.
 
 N.B. The run_main.sh script is for Debian based Linux users to easily create a launcher for running Hashsafe.
+    <directory/run_main.sh> is a placeholder for where run_main.sh is stored on your system.
 
  Contributing
 
