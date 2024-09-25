@@ -3,6 +3,14 @@
 
 **HashSafe** is a robust, secure password manager with bcrypt hashing, Fernet encryption, and PBKDF2HMAC key derivation. It offers a Tkinter-based GUI, unique salts, and SHA256 data integrity checks. Perfect for Windows, macOS, and Linux users. Open Source under GNU GPL v3.0.
 
+**Hashsafe** has absolutely no internet connectivity, it is up to the user to keep Python and dependencies in **requirements.txt** up to date to ensure the program stays up to date.
+
+Lack of internet connectivity means that as long as your OS is secure, there is no attack surface for hackers to gain access to your encrypted vault files.
+Lack of 2FA also means that the developer is unable to provide any information to government agencies in the event of a subpoena.
+
+**HashSafe** implements industry standard encryption functionality, on par with market leaders like KeyPass and Bitwarden.
+
+
 ## Table of Contents
 
 - [Security Features](#security-features)
@@ -26,10 +34,12 @@
 - **File Permission Management**: Ensures only admin/sudo users can manipulate the vault files, even outside HashSafe.
 - **User-Friendly Interface**: Intuitive Tkinter-based GUI for easy interaction.
 
+
 ### Additional Security Measures
 
 - Implemented functionality to force user interaction between each unsuccessful Sign-In attempt.
 - HashSafe terminates after 3 unsuccessful Sign-In attempts, making brute-forcing via the GUI practically impossible.
+
 
 ## Installation
 
@@ -58,6 +68,7 @@ To install HashSafe, follow these steps:
    ```bash
    python3 main.py
    ```
+
 
 ## Creating Launchers/Desktop Shortcuts
 
