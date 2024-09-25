@@ -3,7 +3,7 @@
 
 **HashSafe** is a robust, secure password manager with bcrypt hashing, Fernet encryption, and PBKDF2HMAC key derivation. It offers a Tkinter-based GUI, unique salts, and SHA256 data integrity checks. Perfect for Windows, macOS, and Linux users. Open Source under GNU GPL v3.0.
 
-**Hashsafe** has absolutely no internet connectivity, it is up to the user to keep Python and dependencies in **requirements.txt** up to date to ensure the program stays up to date.
+**Hashsafe** has absolutely no internet connectivity, it is up to the user to keep Python and dependencies in **requirements.txt** updated to ensure the program stays up to date.
 
 Lack of internet connectivity means that as long as your OS is secure, there is no attack surface for hackers to gain access to your encrypted vault files.
 Lack of 2FA also means that the developer is unable to provide any information to government agencies in the event of a subpoena.
