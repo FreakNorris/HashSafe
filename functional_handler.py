@@ -323,8 +323,9 @@ class FunctionalHandler:
         Returns:
             bool: True if the password is strong, False otherwise.
         """
+        # Regex pattern to match all possible passwords meeting the criteria
         regex = re.compile(
-            r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[-@$!%*?&])[A-Za-z\d\-@$!%*?&]{8,}$"
+            r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[ \t\n\r\f\v!@#$%^&*()_+\-=\[\]{};':\"\\|,.<>\/?])[A-Za-z\d \t\n\r\f\v!@#$%^&*()_+\-=\[\]{};':\"\\|,.<>\/?]{8,}$"
         )
         return regex.match(password) is not None
 
