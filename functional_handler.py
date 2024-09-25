@@ -15,6 +15,8 @@ from hasher import (
     generate_salt,
 )
 import tkinter as tk
+import gc
+import ctypes
 
 
 class FunctionalHandler:
@@ -101,6 +103,10 @@ class FunctionalHandler:
         self.ui_handler.update_buttons()
         self.ui_handler.sign_up_button.grid_remove()
         self.ui_handler.sign_in_button.grid()
+        self.overwrite_memory(master_password.encode())
+        self.overwrite_memory(confirm_password.encode())
+        del master_password, confirm_password  # Explicitly delete the sensitive data
+        gc.collect()  # Explicitly invoke garbage collection
 
     def sign_in(self):
         """
@@ -126,6 +132,9 @@ class FunctionalHandler:
             self.update_ui_for_signed_in_user()
             self.ui_handler.update_status_bar("Sign in successful.")
             self.incorrect_attempts = 0
+            self.overwrite_memory(master_password.encode())
+            del master_password  # Explicitly delete the sensitive data
+            gc.collect()  # Explicitly invoke garbage collection
             return
         except FileNotFoundError:
             self.show_custom_error(
@@ -144,6 +153,9 @@ class FunctionalHandler:
             else:
                 self.show_custom_error("Error", "Incorrect master password.")
             self.ui_handler.sign_in_button.config(state=tk.NORMAL)
+            self.overwrite_memory(master_password.encode())
+            del master_password  # Explicitly delete the sensitive data
+            gc.collect()  # Explicitly invoke garbage collection
 
     def update_ui_for_signed_in_user(self):
         """
@@ -173,6 +185,7 @@ class FunctionalHandler:
         self.ui_handler.update_status_bar("Signed out.")
         self.ui_handler.update_buttons()
         self.ui_handler.description_label.grid()
+        gc.collect()  # Explicitly invoke garbage collection
 
     def save_password(self):
         """
@@ -193,6 +206,10 @@ class FunctionalHandler:
                 self.save_password()
             elif action == "cancel":
                 self.ui_handler.save_password_button.config(state=tk.NORMAL)
+            self.overwrite_memory(password_input.encode())
+            self.overwrite_memory(password_id.encode())
+            del password_input, password_id  # Explicitly delete the sensitive data
+            gc.collect()  # Explicitly invoke garbage collection
             return
 
         salt = bytes.fromhex(self.user_vault["salt"])
@@ -206,6 +223,10 @@ class FunctionalHandler:
         messagebox.showinfo("Success", "Password saved.")
         self.ui_handler.display_vault()
         self.ui_handler.save_password_button.config(state=tk.NORMAL)
+        self.overwrite_memory(password_input.encode())
+        self.overwrite_memory(password_id.encode())
+        del password_input, password_id  # Explicitly delete the sensitive data
+        gc.collect()  # Explicitly invoke garbage collection
 
     def handle_duplicate_password_id(self, password_id):
         """
@@ -239,6 +260,9 @@ class FunctionalHandler:
         messagebox.showinfo("Success", "Password overwritten.")
         self.ui_handler.display_vault()
         self.ui_handler.save_password_button.config(state=tk.NORMAL)
+        self.overwrite_memory(password_input.encode())
+        del password_input  # Explicitly delete the sensitive data
+        gc.collect()  # Explicitly invoke garbage collection
 
     def view_password_from_list(self):
         """
@@ -297,6 +321,9 @@ class FunctionalHandler:
             return
 
         self.ui_handler.view_password(password_id, decrypted_password)
+        self.overwrite_memory(decrypted_password.encode())
+        del decrypted_password  # Explicitly delete the sensitive data
+        gc.collect()  # Explicitly invoke garbage collection
 
     def load_passwords(self):
         """
@@ -398,3 +425,21 @@ class FunctionalHandler:
             message (str): The error message to display.
         """
         self.ui_handler.show_custom_error(title, message)
+
+    def overwrite_memory(self, data, overwrite_value=b"Better luck next time!"):
+        """
+        Overwrite the memory location with non-sensitive data.
+
+        Args:
+            data (bytes): The sensitive data to overwrite.
+            overwrite_value (bytes): The value to overwrite the memory with.
+        """
+        if isinstance(data, bytes):
+            data_length = len(data)
+            data_address = ctypes.addressof(ctypes.c_char.from_buffer(data))
+            for i in range(data_length):
+                ctypes.memset(
+                    data_address + i, overwrite_value[i % len(overwrite_value)], 1
+                )
+        else:
+            raise ValueError("Data must be of type bytes")
