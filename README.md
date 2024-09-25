@@ -63,7 +63,7 @@ To install HashSafe, follow these steps:
 
 ### For Linux Users
 
-1. **Create a Launcher**:
+1. **To run the script**:
 
    - Open a terminal and navigate to the project directory.
    - Edit the `run_main.sh` script to replace the placeholder with the actual directory path:
@@ -123,7 +123,7 @@ To install HashSafe, follow these steps:
 
 ### For Windows Users
 
-1. **Create a Desktop Shortcut**:
+1. **To run the script**:
 
    - Open a Command Prompt and navigate to the project directory.
    - Edit the `run_main.bat` script to replace the placeholder with the actual directory path:
