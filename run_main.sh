@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Set absolute paths
-SCRIPT_DIR="/home/erik/Documents/AAA_System/hasher"
+SCRIPT_DIR="<directory/run_main.sh>"
 MAIN_PY="$SCRIPT_DIR/main.py"
 
 # Check if python3 is installed
