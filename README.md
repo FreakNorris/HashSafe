@@ -1,234 +1,180 @@
-**HashSafe - Secure Offline Password Manager**
 
-HashSafe is a robust, secure password manager with bcrypt hashing, Fernet encryption, and PBKDF2HMAC key derivation. It offers a Tkinter-based GUI, unique salts, and SHA256 data integrity checks. Perfect for Windows, macOS, and Linux users. Open Source under GNU GPL v3.0.
+# HashSafe - Secure Offline Password Manager
 
+**HashSafe** is a robust, secure password manager with bcrypt hashing, Fernet encryption, and PBKDF2HMAC key derivation. It offers a Tkinter-based GUI, unique salts, and SHA256 data integrity checks. Perfect for Windows, macOS, and Linux users. Open Source under GNU GPL v3.0.
 
-Table of Contents:
+## Table of Contents
 
-- Security Features
+- [Security Features](#security-features)
+- [Installation](#installation)
+- [Creating Launchers/Desktop Shortcuts](#creating-launchersdesktop-shortcuts)
+- [Usage](#usage)
+- [Contributing](#contributing)
+- [License](#license)
+- [Audit](#audit)
+- [Contact](#contact)
 
-- Installation
+## Security Features
 
-- Creating Launchers/Desktop Shortcuts
+### Core Security Features
 
-- Usage
+- **Secure Password Storage**: Utilizes bcrypt for secure password hashing.
+- **Encryption**: Implements Fernet symmetric encryption with integrity checks.
+- **Key Derivation**: Uses PBKDF2HMAC with SHA256 for key derivation.
+- **Unique Salts**: Ensures unique salts for each user to prevent rainbow table attacks.
+- **Data Integrity**: Verifies data integrity using SHA256.
+- **File Permission Management**: Ensures only admin/sudo users can manipulate the vault files, even outside HashSafe.
+- **User-Friendly Interface**: Intuitive Tkinter-based GUI for easy interaction.
 
-- Contributing
-
-- License
-
-- Audit
-
-- Contact
-
-
-
-Security Features:
-
-
-Core Security Features:
-
-Secure Password Storage: Utilizes bcrypt for secure password hashing.
-
-Encryption: Implements Fernet symmetric encryption with integrity checks.
-
-Key Derivation: Uses PBKDF2HMAC with SHA256 for key derivation.
-
-Unique Salts: Ensures unique salts for each user to prevent rainbow table attacks.
-
-Data Integrity: Verifies data integrity using SHA256.
-
-File Permission Management: Ensures only admin/sudo users can manipulate the vault files, even outside HashSafe.
-
-User-Friendly Interface: Intuitive Tkinter-based GUI for easy interaction.
-
-
-Additional Security Measures:
+### Additional Security Measures
 
 - Implemented functionality to force user interaction between each unsuccessful Sign-In attempt.
-
 - HashSafe terminates after 3 unsuccessful Sign-In attempts, making brute-forcing via the GUI practically impossible.
 
-
-
-Installation:
+## Installation
 
 To install HashSafe, follow these steps:
 
-Clone the repository:
+1. **Clone the repository**:
 
-bash
-Copy code
-git clone https://github.com/FreakNorris/HashSafe.git
-Navigate to the project directory:
+   ```bash
+   git clone https://github.com/FreakNorris/HashSafe.git
+   ```
 
-bash
-Copy code
-cd HashSafe
+2. **Navigate to the project directory**:
 
+   ```bash
+   cd HashSafe
+   ```
 
-Install the required dependencies:
+3. **Install the required dependencies**:
 
-bash
-Copy code
-pip install -r requirements.txt
+   ```bash
+   pip install -r requirements.txt
+   ```
 
+4. **Run the application**:
 
-Run the application:
+   ```bash
+   python3 main.py
+   ```
 
-bash
-Copy code
-python3 main.py
+## Creating Launchers/Desktop Shortcuts
 
+### For Linux Users
 
+1. **Create a Launcher**:
 
-Creating Launchers/Desktop Shortcuts:
+   - Open a terminal and navigate to the project directory.
+   - Edit the `run_main.sh` script to replace the placeholder with the actual directory path:
 
-For Linux Users:
+     ```bash
+     # Set absolute paths
+     SCRIPT_DIR="/home/user/HashSafe"
+     MAIN_PY="$SCRIPT_DIR/main.py"
+     ```
 
-Open a terminal and navigate to the project directory.
+     Replace `/home/user/HashSafe` with the actual path to the `run_main.sh` script.
 
-Edit the run_main.sh script to replace the placeholder with the actual directory path:
+   - Make the `run_main.sh` script executable:
 
-bash
-Copy code
-# Set absolute paths
-SCRIPT_DIR="/home/user/HashSafe"
-MAIN_PY="$SCRIPT_DIR/main.py"
+     ```bash
+     chmod +x run_main.sh
+     ```
 
-Replace /home/user/HashSafe with the actual path to the run_main.sh script.
+   - Run the `run_main.sh` script:
 
+     ```bash
+     ./run_main.sh
+     ```
 
-Make the run_main.sh script executable:
+   - Optionally, you can create a desktop launcher:
+     - **Using MenuLibre**:
+       1. Install MenuLibre if it's not already installed:
 
-bash
-Copy code
-chmod +x run_main.sh
+          ```bash
+          sudo apt-get install menulibre
+          ```
 
+       2. Open MenuLibre from your application menu.
+       3. Click "Add Application" to create a new entry.
+       4. Fill in the following details:
+          - **Name**: HashSafe
+          - **Command**: `/usr/local/bin/run_main.sh` (or the path where you copied `run_main.sh`)
+          - **Working Directory**: The directory where `run_main.sh` is located.
+          - **Icon**: Browse to the icon file you want to use.
+       5. Click "Save" to create the launcher.
 
-Run the run_main.sh script:
+     - **Using a .desktop file**:
+       1. Copy the `run_main.sh` script to a location in your PATH, such as `/usr/local/bin`.
+       2. Create a `.desktop` file in `~/.local/share/applications/` with the following content:
 
-bash
-Copy code
-./run_main.sh
+          ```plaintext
+          [Desktop Entry]
+          Name=HashSafe
+          Exec=/usr/local/bin/run_main.sh
+          Icon=/path/to/icon.png
+          Terminal=false
+          Type=Application
+          Categories=Utility;
+          ```
 
+       3. Replace `/path/to/icon.png` with the actual path to an icon file.
 
-Optionally, you can create a desktop launcher:
+### For Windows Users
 
-Using MenuLibre:
+1. **Create a Desktop Shortcut**:
 
-Install MenuLibre if it's not already installed:
+   - Open a Command Prompt and navigate to the project directory.
+   - Edit the `run_main.bat` script to replace the placeholder with the actual directory path:
 
-bash
-Copy code
-sudo apt-get install menulibre
+     ```cmd
+     REM Set absolute paths
+     set SCRIPT_DIR=C:\Users\YourUsername\Documents\HashSafe\
+     set MAIN_PY=%SCRIPT_DIR%main.py
+     ```
 
-Open MenuLibre from your application menu.
+     Ensure that `C:\Users\YourUsername\Documents\HashSafe\` correctly resolves to the directory containing `run_main.bat`.
 
-Click "Add Application" to create a new entry.
+   - Make the `run_main.bat` script executable:
 
-Fill in the following details:
+     ```cmd
+     icacls run_main.bat /grant Everyone:F
+     ```
 
-Name: HashSafe
+   - Run the `run_main.bat` script:
 
-Command: /usr/local/bin/run_main.sh (or the path where you copied run_main.sh)
+     ```cmd
+     run_main.bat
+     ```
 
-Working Directory: The directory where run_main.sh is located.
+   - Optionally, you can create a desktop shortcut:
+     - Right-click on the desktop and select "New" > "Shortcut".
+     - In the location field, enter the full path to `run_main.bat`, e.g., `C:\Users\YourUsername\Documents\HashSafe\run_main.bat`.
+     - Click "Next" and give the shortcut a name, e.g., "HashSafe".
+     - Click "Finish" to create the shortcut.
 
-Icon: Browse to the icon file you want to use.
+## Usage
 
-Click "Save" to create the launcher.
+- **Sign Up**: Create a new account by providing a master password.
+- **Sign In**: Log in using your master password.
+- **Save Password**: Add new passwords to your vault.
+- **View Password**: Retrieve and view stored passwords securely.
+- **Delete Password**: Remove passwords from your vault.
 
-Using a .desktop file:
-
-Copy the run_main.sh script to a location in your PATH, such as /usr/local/bin.
-
-Create a .desktop file in ~/.local/share/applications/ with the following content:
-
-plaintext
-Copy code
-[Desktop Entry]
-Name=HashSafe
-Exec=/usr/local/bin/run_main.sh
-Icon=/path/to/icon.png
-Terminal=false
-Type=Application
-Categories=Utility;
-
-Replace /path/to/icon.png with the actual path to an icon file.
-
-
-For Windows Users:
-
-Open a Command Prompt and navigate to the project directory.
-
-Edit the run_main.bat script to replace the placeholder with the actual directory path:
-
-cmd
-Copy code
-REM Set absolute paths
-set SCRIPT_DIR=C:\Users\YourUsername\Documents\HashSafe\
-set MAIN_PY=%SCRIPT_DIR%main.py
-
-Ensure that C:\Users\YourUsername\Documents\HashSafe\ correctly resolves to the directory containing run_main.bat.
-
-
-Make the run_main.bat script executable:
-
-cmd
-Copy code
-icacls run_main.bat /grant Everyone:F
-
-
-Run the run_main.bat script:
-
-cmd
-Copy code
-run_main.bat
-
-
-Optionally, you can create a desktop shortcut:
-
-Right-click on the desktop and select "New" > "Shortcut".
-
-In the location field, enter the full path to run_main.bat, e.g., C:\Users\YourUsername\Documents\HashSafe\run_main.bat.
-
-Click "Next" and give the shortcut a name, e.g., "HashSafe".
-
-Click "Finish" to create the shortcut.
-
-
-
-Usage:
-
-Sign Up: Create a new account by providing a master password.
-
-Sign In: Log in using your master password.
-
-Save Password: Add new passwords to your vault.
-
-View Password: Retrieve and view stored passwords securely.
-
-Delete Password: Remove passwords from your vault.
-
-
-
-Contributing:
+## Contributing
 
 Contributions are welcome as long as the license is respected.
 
+## License
 
+This project is licensed under the GNU General Public License v3.0. See the [LICENSE](LICENSE) file for details.
 
-License:
-This project is licensed under the GNU General Public License v3.0. See the LICENSE file for details.
-
-
-
-Audit:
+## Audit
 
 HashSafe has undergone a thorough security audit using Bandit, a static analysis tool for Python code. The audit results are as follows:
 
-
+```plaintext
 redacted@Laptop:~/Documents/AAA_System/hasher$ bandit -r .
 [main]  INFO    profile include tests: None
 [main]  INFO    profile exclude tests: None
@@ -256,24 +202,22 @@ Run metrics:
                 Medium: 0.0
                 High: 0.0
 Files skipped (0):
+```
 
-
-Interpretation:
+**Interpretation**:
 
 The audit conducted using Bandit, a widely-used static analysis tool for Python, revealed no security issues in the codebase. This is a positive outcome, indicating that HashSafe's code adheres to best practices and does not contain any obvious vulnerabilities.
 
-No Issues Identified: The absence of any issues suggests that the codebase is well-maintained and follows secure coding practices.
-
-Comprehensive Scan: The audit covered all 839 lines of code without skipping any, ensuring a thorough examination.
-
-High Confidence: The results show zero issues across all severity and confidence levels, reinforcing the reliability of the code.
+- **No Issues Identified**: The absence of any issues suggests that the codebase is well-maintained and follows secure coding practices.
+- **Comprehensive Scan**: The audit covered all 839 lines of code without skipping any, ensuring a thorough examination.
+- **High Confidence**: The results show zero issues across all severity and confidence levels, reinforcing the reliability of the code.
 
 This audit provides confidence in the security of HashSafe, ensuring that users can trust the application with their sensitive data.
 
-
-
-Contact:
+## Contact
 
 For any questions or feedback, please open an issue on GitHub, or email me: renewitsolutions@tutamail.com
 
 Please remember to star my repository if you like my program. It helps.
+
+---FreakNorris---
